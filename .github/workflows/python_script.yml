@@ -31,7 +31,7 @@ jobs:
           python generate_3d_plot.py
 
       - name: Upload HTML file as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: generated-html
           path: 3d_energy_probability_distribution.html
