@@ -46,11 +46,11 @@ jobs:
 
       - name: Upload HTML file to Release
         uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./3d_energy_probability_distribution.html
           asset_name: 3d_energy_probability_distribution.html
           asset_content_type: text/html
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
