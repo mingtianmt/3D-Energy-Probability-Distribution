@@ -28,7 +28,8 @@ jobs:
 
       - name: Run Python script
         run: |
-          python generate_3d_plot.py
+          cd ../..
+          python plots.py
 
       - name: Upload HTML file as artifact
         uses: actions/upload-artifact@v3
