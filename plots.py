@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import plotly.io as pio
 
 # 设置渲染器
-pio.renderers.default = 'notebook'
+#pio.renderers.default = 'notebook'
 
 # 读取CSV文件
 df_final_state = pd.read_csv("3D-EP.csv")
@@ -119,8 +119,6 @@ fig.update_layout(
     )
 )
 
-# 显示图形
-fig.show()
 
 # 保存图像为 HTML 文件
 fig.write_html("3d_energy_probability_distribution.html")
