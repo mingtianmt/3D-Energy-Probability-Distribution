@@ -121,3 +121,6 @@ fig.update_layout(
 
 # 显示图形
 fig.show()
+
+# 保存图像为 HTML 文件
+fig.write_html("3d_energy_probability_distribution.html")
