@@ -101,7 +101,7 @@ for i in range(len(x_faces)):
         cmin=np.min(colors),
         cmax=np.max(colors),
         opacity=1,
-        hoverinfo='skip'  # 跳过 hover 信息
+        hoverinfo='all'  # 跳过 hover 信息
     ))
 
 # 设置布局
