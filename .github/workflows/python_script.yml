@@ -1,51 +1,53 @@
-name: Run Python Script to Generate HTML
+name: Run Python Script to Generate HTML and Deploy to GitHub Pages
 
 on:
   push:
     tags:
-      - '*'  # Trigger on tag push, not on branch push
-  pull_request:
-    branches:
-      - main
+      - '*'  # Trigger on any tag push
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      # Step 2: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.12.2'
+          python-version: '3.12.2'  # Specify the Python version
 
+      # Step 3: Clear pip cache to avoid old dependencies
       - name: Clear pip cache
         run: |
           pip cache purge
-      
+
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install --upgrade setuptools
-          pip install -r requirements.txt
+          pip install -r requirements.txt  # Install your project dependencies
 
+      # Step 5: Run the Python script to generate HTML
       - name: Run Python script
         run: |
-          python plots.py
+          python plots.py  # Execute your Python script to generate the HTML file
 
-      - name: Create GitHub Release
+      # Step 6: Check if the HTML file is generated correctly
+      - name: Check if HTML file exists
+        run: |
+          ls -l ./3d_energy_probability_distribution.html  # List files to ensure the HTML is generated
+
+      # Step 7: Create GitHub Release and Upload HTML file
+      - name: Create GitHub Release and Upload HTML file
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref_name }}  # Tag name
-          name: Release ${{ github.ref_name }}  # Use 'name' instead of 'release_name'
+          tag_name: ${{ github.ref_name }}  # Use the tag name to create the release
+          name: Release ${{ github.ref_name }}  # Use tag name as release name
+          files: ./3d_energy_probability_distribution.html  # Upload the generated HTML file
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload HTML file to Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ./3d_energy_probability_distribution.html
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Authentication token to interact with GitHub API
