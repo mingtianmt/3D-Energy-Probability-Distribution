@@ -28,7 +28,6 @@ jobs:
 
       - name: Run Python script
         run: |
-          cd ..
           python plots.py
 
       - name: Upload HTML file as artifact
