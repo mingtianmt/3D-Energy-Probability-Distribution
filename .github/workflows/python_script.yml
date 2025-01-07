@@ -2,8 +2,8 @@ name: Run Python Script to Generate HTML and Deploy to GitHub Pages
 
 on:
   push:
-    tags:
-      - '*'  # Trigger on any tag push
+    branches:
+      - main
 
 jobs:
   build:
